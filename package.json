@@ -1,0 +1,25 @@
+{
+  "name": "exercise-tracker-backend",
+  "version": "1.0.0",
+  "description": "Backend for the exercise tracker of Workoutly",
+  "main": "server.js",
+  "scripts": {
+    "start": "node dist/app.js",
+    "dev": "nodemon src/app.ts",
+    "build": "tsc.cmd -p ."
+  },
+  "author": "Philip Mathew",
+  "license": "MIT",
+  "dependencies": {
+    "dotenv": "^16.0.2",
+    "express": "^4.18.1",
+    "mongoose": "^6.6.0"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.13",
+    "@types/node": "^18.7.16",
+    "nodemon": "^2.0.19",
+    "ts-node": "^10.9.1",
+    "typescript": "^4.8.3"
+  }
+}
