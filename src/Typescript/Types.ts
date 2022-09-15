@@ -3,5 +3,9 @@ export type ExerciseType = {
     equipment: string,
     gifUrl: string,
     name: string,
-    target: string
+    target: string,
+    difficulty: string,
+}
+export type BodyPartType = {
+    bodyPart: string
 }

@@ -5,7 +5,8 @@ interface IExercise {
     equipment: string,
     gifUrl: string,
     name: string,
-    target: string
+    target: string,
+    difficulty: string,
 }
 
 const exerciseSchema = new mongoose.Schema<IExercise>({
@@ -13,7 +14,8 @@ const exerciseSchema = new mongoose.Schema<IExercise>({
     equipment:{type: String, default: 'none'},
     gifUrl:{type: String, default: 'none'},
     name:{type: String, required: [true, 'You must provide a name for the exercise']},
-    target:{type: String, required: [true, 'You must specify the target muscle']}
+    target:{type: String, required: [true, 'You must specify the target muscle']},
+    difficulty: {type: String, required: [true, 'You must provide a difficulty']},
 })
 
 const exercise = mongoose.model<IExercise>("exercises", exerciseSchema)
