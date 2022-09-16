@@ -1,17 +1,12 @@
 import mongoose from "mongoose";
+import { IngredientsType } from "../Typescript/Types";
 
-interface IIngredients {
-    amount: number,
-    image: string,
-    name: string,
-}
-
-const ingredientsSchema = new mongoose.Schema<IIngredients>({
+const ingredientsSchema = new mongoose.Schema<IngredientsType>({
     amount: {type: Number, required: [true, "Provide an amount"]},
     image: {type: String, required:[true, "Provide an image"]},
     name: {type: String, required:[true, "Provide a name"]}
 })
 
-const ingredient = mongoose.model<IIngredients>("ingredients", ingredientsSchema);
+const ingredient = mongoose.model<IngredientsType>("ingredients", ingredientsSchema);
 
 export default ingredient;

@@ -1,15 +1,7 @@
 import mongoose from "mongoose";
+import { ExerciseType } from "../Typescript/Types";
 
-interface IExercise {
-    bodyPart: string,
-    equipment: string,
-    gifUrl: string,
-    name: string,
-    target: string,
-    difficulty: string,
-}
-
-const exerciseSchema = new mongoose.Schema<IExercise>({
+const exerciseSchema = new mongoose.Schema<ExerciseType>({
     bodyPart:{type: String, required: [true, 'You must specify a body part']},
     equipment:{type: String, default: 'none'},
     gifUrl:{type: String, default: 'none'},
@@ -18,6 +10,6 @@ const exerciseSchema = new mongoose.Schema<IExercise>({
     difficulty: {type: String, required: [true, 'You must provide a difficulty']},
 })
 
-const exercise = mongoose.model<IExercise>("exercises", exerciseSchema)
+const exercise = mongoose.model<ExerciseType>("exercises", exerciseSchema)
 
 export default exercise;

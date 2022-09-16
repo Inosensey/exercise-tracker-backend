@@ -9,3 +9,13 @@ export type ExerciseType = {
 export type BodyPartType = {
     bodyPart: string
 }
+export type MealType = {
+    title: string, 
+    image: string,
+    imageType: string
+}
+export type IngredientsType = {
+    amount: number,
+    image: string,
+    name: string,
+}

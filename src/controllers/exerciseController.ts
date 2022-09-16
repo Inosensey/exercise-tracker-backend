@@ -8,7 +8,7 @@ import { BodyPartType, ExerciseType } from "../Typescript/Types";
 
 // @desc Get all exercise
 // @route GET api/exercise
-// @access public
+// @access private
 const getExercise = async (req:Request, res:Response) => {
     try {
         const exercise = await ExerciseModel.find();
@@ -20,7 +20,7 @@ const getExercise = async (req:Request, res:Response) => {
 
 // @desc Get all exercise by body part
 // @route GET api/exercise/:bodypart
-// @access public
+// @access private
 const getBodyPartExercise = async (req:Request<BodyPartType,{},{}>, res:Response) => {
     try {
         const exercise = await ExerciseModel.find({bodyPart: req.params.bodyPart})
@@ -32,7 +32,7 @@ const getBodyPartExercise = async (req:Request<BodyPartType,{},{}>, res:Response
 
 // @desc Add exercise
 // @route post api/exercise/add
-// @access public
+// @access private
 const addExercise = async (req:Request<{},{},ExerciseType>, res:Response) => {    
     try {
         const newExercise = await ExerciseModel.create({
