@@ -7,6 +7,12 @@ import { MealTypeInfo } from "../Typescript/Types";
 type IngredientsParam = {
   ingredients: string;
 };
+type BMIParam = {
+  bmi: number;
+};
+type MealTypeParam = {
+  MealType: string;
+};
 
 // @Desc Get all meals
 // @Route api/meal
@@ -14,8 +20,7 @@ type IngredientsParam = {
 const getMeal = async (req: Request, res: Response) => {
   try {
     const meal = await mealModel.find<MealTypeInfo>();
-    const mealPlan = setUpMealPlan(meal);
-    res.status(200).json(mealPlan);
+    res.status(200).json(meal);
   } catch (error) {
     res.json(error);
   }
@@ -24,8 +29,30 @@ const getMeal = async (req: Request, res: Response) => {
 // @Desc Get meals by BMI
 // @Route api/meal/recipes/:bmi
 // @Access private
-const getMealByBmi = (req: Request, res: Response) => {
-  res.json({ Message: `Meal received base on BMI: ${req.params.bmi}` });
+const getMealByBmi = async (req: Request<BMIParam, {}, {}>, res: Response) => {
+  try {
+    let meal;
+    if (req.params.bmi >= 30)
+      meal = await mealModel.find<MealTypeInfo>({ cal: { $lt: 500 } });
+    res.status(200).json(meal);
+  } catch (error) {
+    res.json(error);
+  }
+};
+
+// @Desc Get meals by meal type
+// @Route api/meal/findByMealType/:MealType
+// @Access private
+const getMealByType = async (
+  req: Request<MealTypeParam, {}, {}>,
+  res: Response
+) => {
+  try {
+    const meal = await mealModel.find({ mealType: req.params.MealType });
+    res.status(200).json(meal);
+  } catch (error) {
+    res.json(error);
+  }
 };
 
 // @Desc Get meals by ingredients
@@ -38,6 +65,24 @@ const getMealByIngredients = async (
   try {
     const meal = await mealModel.find({ ingredients: req.params.ingredients });
     res.status(200).json(meal);
+  } catch (error) {
+    res.json(error);
+  }
+};
+
+// @Desc set meal plan
+// @Route api/meal/setMealPlan/:bmi
+// @Access private
+const setMealPlan = async (req: Request<BMIParam, {}, {}>, res: Response) => {
+  try {
+    let meal;
+    if (req.params.bmi >= 30) {
+      meal = await mealModel.find<MealTypeInfo>({ cal: { $lt: 500 } });
+    } else {
+      meal = await mealModel.find<MealTypeInfo>();
+    }
+    const MealPlan = setUpMealPlan(meal);
+    res.json(MealPlan);
   } catch (error) {
     res.json(error);
   }
@@ -62,4 +107,11 @@ const addMeal = async (req: Request<{}, {}, MealTypeInfo>, res: Response) => {
   }
 };
 
-export { getMeal, getMealByBmi, getMealByIngredients, addMeal };
+export {
+  getMeal,
+  getMealByBmi,
+  getMealByType,
+  getMealByIngredients,
+  addMeal,
+  setMealPlan,
+};
