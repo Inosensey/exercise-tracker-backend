@@ -1,9 +1,8 @@
 import { Request, Response } from "express";
-import meal from "../models/mealModel";
 
 import mealModel from "../models/mealModel";
-import { IIngredients } from "../Typescript/Interface";
-import { MealType } from "../Typescript/Types";
+import { setUpMealPlan } from "../Logic/mealLogic";
+import { MealTypeInfo } from "../Typescript/Types";
 
 type IngredientsParam = {
   ingredients: string;
@@ -14,8 +13,9 @@ type IngredientsParam = {
 // @Access private
 const getMeal = async (req: Request, res: Response) => {
   try {
-    const meal = await mealModel.find();
-    res.status(200).json(meal);
+    const meal = await mealModel.find<MealTypeInfo>();
+    const mealPlan = setUpMealPlan(meal);
+    res.status(200).json(mealPlan);
   } catch (error) {
     res.json(error);
   }
@@ -46,7 +46,7 @@ const getMealByIngredients = async (
 // @Desc Add meal
 // @Route api/meal/add
 // Access private
-const addMeal = async (req: Request<{}, {}, MealType>, res: Response) => {
+const addMeal = async (req: Request<{}, {}, MealTypeInfo>, res: Response) => {
   try {
     const meal = await mealModel.create({
       id: req.body.id,

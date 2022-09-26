@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
-import { MealType } from "../Typescript/Types";
+import { MealTypeInfo } from "../Typescript/Types";
 
-const mealSchema = new mongoose.Schema<MealType>({
+const mealSchema = new mongoose.Schema<MealTypeInfo>({
   id: { type: Number, required: [true, "You must provide an ID"] },
   title: { type: String, required: [true, "You must provide a title"] },
   image: { type: String, required: [true, "You must provide an image src"] },
@@ -16,6 +16,6 @@ const mealSchema = new mongoose.Schema<MealType>({
   },
 });
 
-const meal = mongoose.model<MealType>("meal", mealSchema);
+const meal = mongoose.model<MealTypeInfo>("meal", mealSchema);
 
 export default meal;

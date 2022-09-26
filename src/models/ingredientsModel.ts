@@ -8,7 +8,16 @@ const ingredientsSchema = new mongoose.Schema<IIngredients>({
   },
   ingredients: [
     {
-      amount: { type: Number, required: [true, "Provide an amount"] },
+      amount: {
+        metric: {
+          value: { type: Number, required: [true, "Provide a value"] },
+          unit: { type: String },
+        },
+        us: {
+          value: { type: Number, required: [true, "Provide a value"] },
+          unit: { type: String },
+        },
+      },
       image: { type: String, required: [true, "Provide an image"] },
       name: { type: String, required: [true, "Provide a name"] },
     },

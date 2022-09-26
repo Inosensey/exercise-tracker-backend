@@ -9,7 +9,7 @@ export type ExerciseType = {
 export type BodyPartType = {
   bodyPart: string;
 };
-export type MealType = {
+export type MealTypeInfo = {
   id: number;
   title: string;
   image: string;
