@@ -6,9 +6,6 @@ export type ExerciseType = {
   target: string;
   difficulty: string;
 };
-export type BodyPartType = {
-  bodyPart: string;
-};
 export type MealTypeInfo = {
   id: number;
   title: string;

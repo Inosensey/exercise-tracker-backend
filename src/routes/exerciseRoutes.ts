@@ -1,10 +1,18 @@
-import express  from "express";
-import {addExercise, getBodyPartExercise, getExercise} from "../controllers/exerciseController"
+import express from "express";
+import {
+  addExercise,
+  getBodyPartExercise,
+  getBodyPartExerciseBasedOnDif,
+  getExercise,
+  getExerciseBasedOnDif,
+} from "../controllers/exerciseController";
 
 const router = express.Router();
 
-router.get('/', getExercise)
-router.get('/:bodyPart', getBodyPartExercise)
-router.post("/add", addExercise)
+router.get("/", getExercise);
+router.get("/difficulty/:difficulty", getExerciseBasedOnDif);
+router.get("/:bodyPart", getBodyPartExercise);
+router.get("/:bodyPart/:difficulty", getBodyPartExerciseBasedOnDif);
+router.post("/add", addExercise);
 
-export default router
+export default router;
