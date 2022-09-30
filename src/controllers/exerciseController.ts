@@ -1,4 +1,5 @@
 import { Request, Response } from "express";
+import { setExerciseSet } from "../Logic/getExerciseSet";
 
 //Model
 import ExerciseModel from "../models/exerciseModel";
@@ -88,18 +89,18 @@ const getExerciseSet = async (
   req: Request<ExerciseSetParam, {}, {}>,
   res: Response
 ) => {
-  console.log(req.params);
   try {
     let exercise;
+    let ExerciseSet;
     if (req.params.exerciseSet === "Beginner") {
       exercise = await ExerciseModel.find({
         exerciseSet: "Beginner Exercise Set",
       });
+      ExerciseSet = setExerciseSet(exercise, "Beginner");
     } else {
       exercise = await ExerciseModel.find();
     }
-    console.log(exercise);
-    res.status(200).json(exercise);
+    res.status(200).json(ExerciseSet);
   } catch (error) {
     res.json(error);
   }

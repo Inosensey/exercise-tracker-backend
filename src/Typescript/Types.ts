@@ -1,7 +1,7 @@
 import { Schema } from "mongoose";
 
 export type ExerciseType = {
-  _id: Schema.Types.ObjectId;
+  _id?: Schema.Types.ObjectId | string;
   bodyPart: string;
   equipment: string;
   gifUrl: string;

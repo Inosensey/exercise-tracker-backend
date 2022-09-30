@@ -67,5 +67,6 @@ export interface IExerciseSchedule {
   ExerciseSchedule: IExercisePerDay[];
 }
 export interface IExerciseSet {
-  Set: IExerciseSchedule[];
+  SetName: string;
+  Schedules: IExerciseSchedule[];
 }
