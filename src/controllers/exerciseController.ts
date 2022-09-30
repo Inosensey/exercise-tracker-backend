@@ -13,6 +13,9 @@ type BodyPartParam = {
 type DifficultyParam = {
   difficulty: string;
 };
+type ExerciseSetParam = {
+  exerciseSet: string;
+};
 
 // @desc Get all exercise
 // @route GET api/exercise
@@ -78,6 +81,30 @@ const getBodyPartExerciseBasedOnDif = async (
   }
 };
 
+// @desc Get exercise set
+// @route GET api/exercise/exerciseSet/:exerciseSet
+// @access private
+const getExerciseSet = async (
+  req: Request<ExerciseSetParam, {}, {}>,
+  res: Response
+) => {
+  console.log(req.params);
+  try {
+    let exercise;
+    if (req.params.exerciseSet === "Beginner") {
+      exercise = await ExerciseModel.find({
+        exerciseSet: "Beginner Exercise Set",
+      });
+    } else {
+      exercise = await ExerciseModel.find();
+    }
+    console.log(exercise);
+    res.status(200).json(exercise);
+  } catch (error) {
+    res.json(error);
+  }
+};
+
 // @desc Add exercise
 // @route post api/exercise/add
 // @access private
@@ -102,10 +129,30 @@ const addExercise = async (
   }
 };
 
+// This is for development purpose only
+const updateExercise = async (
+  req: Request<{}, {}, ExerciseType>,
+  res: Response
+) => {
+  try {
+    await ExerciseModel.updateOne(
+      { _id: req.body._id },
+      { $set: { exerciseSet: "Beginner Exercise Set" } }
+    );
+    res
+      .status(200)
+      .json({ Message: `Exercise ${req.body._id} has been updated` });
+  } catch (error) {
+    res.json(error);
+  }
+};
+
 export {
   getExercise,
   getExerciseBasedOnDif,
   getBodyPartExercise,
   getBodyPartExerciseBasedOnDif,
+  getExerciseSet,
   addExercise,
+  updateExercise,
 };

@@ -1,10 +1,14 @@
+import { Schema } from "mongoose";
+
 export type ExerciseType = {
+  _id: Schema.Types.ObjectId;
   bodyPart: string;
   equipment: string;
   gifUrl: string;
   name: string;
   target: string;
   difficulty: string;
+  exerciseSet: string;
 };
 export type MealTypeInfo = {
   id: number;

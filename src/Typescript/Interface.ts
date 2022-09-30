@@ -1,3 +1,5 @@
+import { ExerciseType } from "./Types";
+
 export interface IIngredients {
   id: number;
   ingredients: [
@@ -53,4 +55,17 @@ export interface IMealPlan {
   Friday: IMealType;
   Saturday: IMealType;
   Sunday: IMealType;
+}
+
+export interface IExercisePerDay {
+  Day: string;
+  Exercise: ExerciseType[];
+}
+
+export interface IExerciseSchedule {
+  Week: number;
+  ExerciseSchedule: IExercisePerDay[];
+}
+export interface IExerciseSet {
+  Set: IExerciseSchedule[];
 }
